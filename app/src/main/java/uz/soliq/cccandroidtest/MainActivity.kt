@@ -16,19 +16,11 @@ class MainActivity : AppCompatActivity() {
     private val db = AppDataBase.getInstance(MyApplication.context)
     private val estimateRepository = EstimateRepository(db.getEstimateDao())
     private val personRepository = PersonRepository(db.getPersonDao())
-    private var textView: TextView? = null
-    private var personTv: TextView? = null
-    private var personWithLinkTv: TextView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        textView = findViewById(R.id.textView)
-        personTv = findViewById(R.id.person)
-        personWithLinkTv = findViewById(R.id.personWithLink)
+
         addData()
-
-        getData()
-
         getEstimateWithLink()
     }
 
@@ -62,20 +54,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun getData() {
-        GlobalScope.launch {
-            val list = estimateRepository.getList()
-            var estimateString = ""
-            list.map { estimateString += it.toString() + "\n" }
-            textView?.text = estimateString
-
-            val people = personRepository.getList()
-            var peopleString = ""
-            people.map { peopleString += it.toString() + "\n" }
-            personTv?.text = peopleString
-        }
-    }
-
     private fun getEstimateWithLink() {
         GlobalScope.launch {
             val estimate = estimateRepository.getById("c574b0b4-bdef-4b92-a8f0-608a86ccf5ab")
@@ -92,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                 requested_by = requestedBy,
                 contact = contact
             )
-            personWithLinkTv?.text = estimateWithLink.toString()
+
         }
     }
 

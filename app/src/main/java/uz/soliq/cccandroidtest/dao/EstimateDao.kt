@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 import retrofit2.http.Path
 import uz.soliq.cccandroidtest.pojo.Estimate
 import uz.soliq.cccandroidtest.pojo.EstimateWithLink
@@ -24,6 +25,9 @@ interface EstimateDao {
 
     @Query("select * from Estimate")
     suspend fun getList(): List<Estimate>
+
+    @Query("select * from Estimate")
+    fun getListFlow(): Flow<List<Estimate>>
 
     @Query("select id, company, address from Estimate where id =:id ")
     suspend fun getListWithLink(@Path("id") id: String): List<EstimateWithLink>
