@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import uz.soliq.cccandroidtest.MyApplication
 import uz.soliq.cccandroidtest.pojo.Estimate
 import uz.soliq.cccandroidtest.pojo.Person
 
@@ -17,9 +18,9 @@ abstract class AppDataBase : RoomDatabase() {
         @Volatile
         private var INSTANCE: AppDataBase? = null
 
-        fun getInstance(context: Context): AppDataBase =
+        fun getInstance(): AppDataBase =
             INSTANCE ?: synchronized(this) {
-                INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
+                INSTANCE ?: buildDatabase(MyApplication.context).also { INSTANCE = it }
             }
 
         private fun buildDatabase(context: Context): AppDataBase {

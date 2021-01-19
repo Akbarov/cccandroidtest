@@ -29,7 +29,5 @@ interface EstimateDao {
     @Query("select * from Estimate")
     fun getListFlow(): Flow<List<Estimate>>
 
-    @Query("select id, company, address from Estimate where id =:id ")
-    suspend fun getListWithLink(@Path("id") id: String): List<EstimateWithLink>
 
 }

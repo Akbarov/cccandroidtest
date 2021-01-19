@@ -15,6 +15,5 @@ class MyApplication: Application() {
         super.onCreate()
         instance = this
         context = applicationContext
-        AppDataBase.getInstance(context)
     }
 }

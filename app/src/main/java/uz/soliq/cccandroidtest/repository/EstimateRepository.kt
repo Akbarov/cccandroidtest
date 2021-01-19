@@ -14,7 +14,6 @@ class EstimateRepository(private val estimateDao: EstimateDao) {
 
     suspend fun getById(id: String) = estimateDao.getWithId(id)
 
-    suspend fun getListWithLink(id: String) = estimateDao.getListWithLink(id)
 
     suspend fun getList() = estimateDao.getList()
 
